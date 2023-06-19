@@ -27,6 +27,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -35,6 +43,28 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.google.firebase:firebase-auth:22.0.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.2'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-database'
+
+    // Retrofit 라이브러리
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+
+    // Gson 변환기 라이브러리
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Scalars 변환기 라이브러리
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-scalars
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+
+
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'

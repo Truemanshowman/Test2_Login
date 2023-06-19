@@ -1,5 +1,6 @@
 package com.example.test2_login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.test2_login.databinding.ActivityMyPageBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,36 +17,33 @@ public class MyPage extends AppCompatActivity {
 
     private FirebaseUser user;
     private FirebaseAuth userAuth;
-
-    private EditText priv_name, priv_email, priv_dogName, priv_gender;
-
-    private Button btn_priv_check, btn_priv_cancel;
+    private ActivityMyPageBinding mBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_page);
+        setContentView(R.layout.activity_login);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userAuth = FirebaseAuth.getInstance();
 
-        priv_name = findViewById(R.id.priv_name);
-        priv_email = findViewById(R.id.priv_email);
-        priv_dogName = findViewById(R.id.priv_dogName);
-        priv_gender = findViewById(R.id.priv_gender);
+        mBinding = ActivityMyPageBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
+        setContentView(view);
 
-        btn_priv_check = findViewById(R.id.btn_priv_check);
-        btn_priv_cancel = findViewById(R.id.btn_priv_cancel);
 
-        btn_priv_check.setOnClickListener(new View.OnClickListener() {
+
+
+        mBinding.btnPrivCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
 
                 if (user != null) {
                     // Name, email address, and profile photo Url
-                    String name = user.getDisplayName();
-                    String email = user.getEmail();
+                    String email = user.getDisplayName();
+                    String passwd = user.getEmail();
 //                    Uri photoUrl = user.getPhotoUrl();
 
                     // Check if user's email is verified
@@ -61,5 +60,6 @@ public class MyPage extends AppCompatActivity {
         });
 
 
+        return ;
     }
 }

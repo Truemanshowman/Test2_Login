@@ -1,5 +1,6 @@
 package com.example.test2_login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test2_login.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser user;
+
+    private ActivityMainBinding mMainBinding;
 
 
     @Override
@@ -25,8 +29,13 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Button btn_logout = findViewById(R.id.btn_logout);
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = mMainBinding.getRoot();
+        setContentView(view);
+
+
+
+        mMainBinding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -40,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_mypage = findViewById(R.id.btn_mypage);
-        btn_mypage.setOnClickListener(new View.OnClickListener() {
+
+        mMainBinding.btnMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -70,5 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }

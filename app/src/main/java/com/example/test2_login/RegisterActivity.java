@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test2_login.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,8 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;           // 파이어베이스 인증
     private DatabaseReference mDatabaseReference; // 실시간 데이터 베이스
-    private EditText join_email, join_pwd; // 회원가입 입력필드
-    private Button btn_join, btn_cancel; // 회원가입 이메일확인, 가입 확인, 가입 취소 버튼
+
+    private ActivityRegisterBinding mRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +33,18 @@ public class RegisterActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("petproject");
 
-        join_email = findViewById(R.id.join_email);
-        join_pwd = findViewById(R.id.join_pwd);
+        mRegister = ActivityRegisterBinding.inflate(getLayoutInflater());
 
 
-        btn_join = findViewById(R.id.btn_join);
-        btn_cancel = findViewById(R.id.btn_cancel); //
 
 
-        btn_join.setOnClickListener(new View.OnClickListener()
+        mRegister.btnJoin.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 // 회원가입 처리시작
-                String strEmail = join_email.getText().toString();
-                String strPwd = join_pwd.getText().toString();
+                String strEmail = mRegister.joinEmail.getText().toString();
+                String strPwd = mRegister.joinPwd.getText().toString();
 
                 mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -72,8 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_cancel = findViewById(R.id.btn_cancel);
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        mRegister.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
